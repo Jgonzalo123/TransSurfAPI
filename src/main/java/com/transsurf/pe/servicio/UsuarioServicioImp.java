@@ -83,7 +83,7 @@ public class UsuarioServicioImp implements UsuarioServicio {
         Usuario usuario = mapearEntidad(usuarioDTO);
         usuario.setPassword(passwordEncoder.encode(usuarioDTO.getPassword()));
         usuario.setDocumento(documento);
-        usuario.setRoles(Collections.singleton(new Rol(2,"ROLE_CLIENT")));
+        usuario.setRoles(Collections.singleton(new Rol(2)));
         usuario.setIdUsuario(idUsuario);
 
         Usuario usuarioActualizado = usuarioRepositorio.save(usuario);
@@ -98,6 +98,26 @@ public class UsuarioServicioImp implements UsuarioServicio {
 
         usuarioRepositorio.delete(usuario);
     }
+
+    @Override
+    public List<UsuarioDTO> listarOperators() {
+        List<Usuario> usuarios = usuarioRepositorio.findAllByRolesIs(new Rol(5));
+        return usuarios.stream().map(usuario -> mapearDTO(usuario)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UsuarioDTO> listarDrivers() {
+        List<Usuario> usuarios = usuarioRepositorio.findAllByRolesIs(new Rol(4));
+        return usuarios.stream().map(usuario -> mapearDTO(usuario)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void actualizarEstado(Usuario usuario, String estado) {
+        usuario.setEstado(estado);
+
+        usuarioRepositorio.save(usuario);
+    }
+
 
     //Mapear Entidad a DTO
     private UsuarioDTO mapearDTO(Usuario usuario) {

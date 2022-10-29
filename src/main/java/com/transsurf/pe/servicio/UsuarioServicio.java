@@ -3,6 +3,7 @@ package com.transsurf.pe.servicio;
 import com.transsurf.pe.dto.UsuarioDTO;
 import com.transsurf.pe.entidades.Documento;
 import com.transsurf.pe.entidades.Rol;
+import com.transsurf.pe.entidades.Usuario;
 
 import java.util.List;
 
@@ -24,4 +25,9 @@ public interface UsuarioServicio {
 
     void eliminarUsuario(long idUsuario);
 
+    public List<UsuarioDTO> listarOperators();
+
+    public List<UsuarioDTO> listarDrivers();
+
+    public void actualizarEstado(Usuario usuario, String estado);
 }

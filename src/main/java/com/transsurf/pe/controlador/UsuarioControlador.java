@@ -55,6 +55,18 @@ public class UsuarioControlador {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/driver")
+    public List<UsuarioDTO> getDrivers() {
+        return usuarioServicio.listarDrivers();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/operator")
+    public List<UsuarioDTO> getOperators() {
+        return usuarioServicio.listarOperators();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/personal/{idDocumento}/{idRol}")
     public ResponseEntity<?> guardarPersonal(@RequestBody UsuarioDTO usuarioDTO,
                                              @PathVariable(name = "idDocumento") int idDocumento,
