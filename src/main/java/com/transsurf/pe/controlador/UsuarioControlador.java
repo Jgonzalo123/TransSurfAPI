@@ -36,7 +36,7 @@ public class UsuarioControlador {
     @Autowired
     private DocumentoRepositorio documentoRepositorio;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('CLIENT')")
     @PostMapping
     public ResponseEntity<UsuarioDTO> getUserData(@RequestBody String numDocOrEmail) {
         return ResponseEntity.ok(usuarioServicio.obtenerUsuarioByNumDocOrEmail(numDocOrEmail));
