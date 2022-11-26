@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,4 +91,17 @@ public class ProgramacionControlador {
 
         return new ResponseEntity<>("Programacion Eliminada con exito",HttpStatus.OK);
     }
+
+    @GetMapping("/{codOrigen}/{codDestino}/{fechaIda}")
+    public ResponseEntity<?> listarBusqueda(@PathVariable(name = "codOrigen") Long codOrigen,
+                                            @PathVariable(name = "codDestino") Long codDestino,
+                                            @PathVariable(name = "fechaIda") Date fechaIda) {
+        Origen origen = origenRepositorio.findById(codOrigen)
+                .orElseThrow(() -> new ResourceNotFoundException("Origen", "id", codOrigen));
+        Destino destino = destinoRepositorio.findById(codDestino).
+                orElseThrow(() -> new ResourceNotFoundException("Destino","id",codDestino));
+
+        return new ResponseEntity<>(programacionServicio.obtenerProgramacionesByOrigenAndDestinoAndFecha(origen, destino, fechaIda),HttpStatus.OK);
+    }
+
 }

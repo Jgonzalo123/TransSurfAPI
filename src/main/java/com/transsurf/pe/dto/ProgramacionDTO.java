@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -13,7 +14,8 @@ public class ProgramacionDTO {
     private UnidadDTO unidad;
     private OrigenDTO origen;
     private DestinoDTO destino;
-    private Timestamp fecha;
+    private Date fecha;
+    private Time hora;
     private Double costo;
     private String estado;
 }

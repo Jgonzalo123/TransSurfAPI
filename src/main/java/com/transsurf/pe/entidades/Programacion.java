@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -29,7 +30,9 @@ public class Programacion {
     private Destino destino;
 
     @Column(name="fecha", nullable = false)
-    private Timestamp fecha;
+    private Date fecha;
+    @Column(name="hora", nullable = false)
+    private Time hora;
     @Column(nullable = false)
     private Double costo;
     @Column(length = 15,nullable = false)

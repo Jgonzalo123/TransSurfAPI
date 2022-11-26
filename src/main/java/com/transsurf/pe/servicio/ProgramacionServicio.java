@@ -6,6 +6,7 @@ import com.transsurf.pe.entidades.Origen;
 import com.transsurf.pe.entidades.Unidad;
 import com.transsurf.pe.entidades.Usuario;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ProgramacionServicio {
@@ -18,4 +19,6 @@ public interface ProgramacionServicio {
     public ProgramacionDTO modificarProgramacion(ProgramacionDTO programacionDTO, Unidad unidad, Origen origen, Destino destino, List<Usuario> usuarios, int idProgramacion);
 
     public void eliminarProgramacion(int idProgramacion);
+
+    public List<ProgramacionDTO> obtenerProgramacionesByOrigenAndDestinoAndFecha(Origen origen, Destino destino, Date fechaIda);
 }

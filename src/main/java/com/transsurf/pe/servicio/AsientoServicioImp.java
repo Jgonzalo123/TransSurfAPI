@@ -22,7 +22,7 @@ public class AsientoServicioImp implements AsientoServicio{
         for (int i = 1; i <= unidad.getNumAsientos(); i++) {
             Asiento asiento = new Asiento();
             asiento.setUnidad(unidad);
-            asiento.setNivel(new Nivel((unidad.getNumPisos() == 2)? ((i <= 12)? 1 : 2) : 2, ""));
+            asiento.setNivel(new Nivel((i <= 12)? 1 : 2, ""));
             asiento.setNumAsiento(i);
             asiento.setEstado("Disponible");
 
@@ -33,12 +33,16 @@ public class AsientoServicioImp implements AsientoServicio{
 
     @Override
     public void actualizarAsientos(Unidad unidad) {
-        boolean nivel2 = asientoRepositorio.existsByUnidadAndNivel(unidad, new Nivel(2,""));
         Long numAsientos = asientoRepositorio.countByUnidad(unidad);
-        if (numAsientos != unidad.getNumAsientos() || nivel2 != (unidad.getNumPisos() == 2)) {
+        if (numAsientos != unidad.getNumAsientos()) {
             List<Asiento> asientos = asientoRepositorio.findAllByUnidad(unidad);
             asientoRepositorio.deleteAll(asientos);
             crearAsientos(unidad);
-        } else if (numAsientos == unidad.getNumAsientos() && nivel2 == (unidad.getNumPisos() == 2)) {}
+        }
+    }
+
+    @Override
+    public List<Asiento> obtenerAsientosByUnidad(Unidad unidad) {
+        return asientoRepositorio.findAllByUnidad(unidad);
     }
 }

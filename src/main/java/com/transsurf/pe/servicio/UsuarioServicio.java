@@ -6,6 +6,7 @@ import com.transsurf.pe.entidades.Rol;
 import com.transsurf.pe.entidades.Usuario;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UsuarioServicio {
 
@@ -15,7 +16,7 @@ public interface UsuarioServicio {
 
     public List<UsuarioDTO> listarClientes();
 
-    public UsuarioDTO crearUsuarioPersonal(UsuarioDTO usuarioDTO, Documento documento, Rol rol);
+    public UsuarioDTO crearUsuarioPersonal(UsuarioDTO usuarioDTO, Documento documento, Set<Rol> roles);
 
     public UsuarioDTO obtenerUsuarioById(long idUsuario);
 
@@ -30,4 +31,12 @@ public interface UsuarioServicio {
     public List<UsuarioDTO> listarDrivers();
 
     public void actualizarEstado(Usuario usuario, String estado);
+
+    public UsuarioDTO modificarCliente(UsuarioDTO usuarioDTO, Documento documento, long idUsuario);
+
+    public UsuarioDTO buscarClienteByDocumentoAndNumDoc(Documento documento, String numDoc);
+
+    public Usuario findByDataOrRegister(UsuarioDTO usuarioDTO, int idDocumento, boolean register);
+
+    public Usuario getUsuarioById(long idUsuario);
 }
